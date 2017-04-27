@@ -12,6 +12,15 @@
 
 //make the huffman tree
 Node* buildHuffmanTree(int* ch, int* freq, int size);
+//print huffman codes
+void printCodes(Node* root, int* codes, int top);
+typedef struct Encoding
+{
+    unsigned int encoding;
+    int len;
+}Encoding;
+
+void create_encoding(Encoding* encodings, Encoding code, Node* node);
 
 int main(int argc, char** argv)
 {
@@ -54,7 +63,10 @@ int main(int argc, char** argv)
     }
     int size = j;
     Node* root = buildHuffmanTree(chars, frequency, size);
-    
+    Encoding encodings[256] = {{0,0}};
+    Encoding code = {0, 0};
+    create_encoding(encodings, code, root);
+
     fclose(file);
     return 0;
 }
@@ -88,4 +100,26 @@ Node* buildHuffmanTree(int* ch, int* freq, int size)
  
     // Step 4: The remaining node is the root node and the tree is complete.
     return findMin(minHeap);
+}
+
+void create_encoding(Encoding* encodings, Encoding code, Node* node)
+{
+    if((node->left == NULL) && (node->right == NULL))
+    {
+        encodings[node->ch] = code;
+    }
+    if(node->left != NULL)
+    {
+        Encoding new_code;
+        new_code.len = code.len + 1;
+        new_code.encoding = (code.encoding << 1) | 0;
+        create_encoding(encodings, new_code, node->left);
+    }
+    if(node->right != NULL)
+    {
+        Encoding new_code;
+        new_code.len = code.len + 1;
+        new_code.encoding = (code.encoding << 1) | 1;
+        create_encoding(encodings, new_code, node->right);
+    }
 }

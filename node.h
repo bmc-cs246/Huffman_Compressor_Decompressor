@@ -16,9 +16,6 @@ typedef struct Node
 //make a new node (malloc)
 Node* new_node(int ch, int freq);
 
-//return true if node is leaf 
-int isLeaf(Node* root);
-
 //free all nodes in a binary tree
 void free_node (Node* root);
 

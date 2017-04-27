@@ -13,11 +13,6 @@ Node* new_node(int ch, int freq)
     return new;
 }
 
-int isLeaf(Node* root)
-{
-    return(root->left == NULL && root->right == NULL);
-}
-
 void free_node(Node* root)
 {
     if(root)
