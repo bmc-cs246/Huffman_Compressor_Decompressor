@@ -1,0 +1,8 @@
+  // 3. For every bit read in from the input file, traverse down the
+  // Huffman tree (going left for 0 bits and right for 1 bits).
+  // When you reach a leaf, there will be a character stored in the
+  // leaf node. Write this character to the output file.
+
+  // 4. Repeat step 3 for every character in the input file (as determined
+  // by looking at the frequency of the root of the Huffman tree, which
+  // is necessarily the total number of characters in the input).a
